@@ -7,3 +7,6 @@ Multiple chat rooms: Users can join different chat rooms and communicate with ot
 User authentication: Users can create accounts and log in to access the chat application.
 User presence: Users can see who is currently online in the chat room.
 Emojis and file sharing: Users can express themselves using emojis and share files with others.
+
+# Description
+$ npm install
