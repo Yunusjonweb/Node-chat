@@ -1,4 +1,4 @@
-#Node.js Chat Application
+# Node.js Chat Application
 This is a chat application built with Node.js that allows users to communicate in real-time.
 
 Features
