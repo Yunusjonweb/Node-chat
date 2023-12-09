@@ -1,54 +1,51 @@
-<%- include("partials/header.ejs")%> <% var error, title, messages, users, me %>
-<!-- <div
-  class="container d-flex flex-column justify-content-center align-items-center"
->
-</div> -->
+<%- include("partials/header.ejs")%> <% var error, title, messages, users, me,id %>
+<% const filterUser = users.filter((user) => user.id !== id ) %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-4">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">Chat Users</h5>
+          <h5 class="card-title"><%= me.full_name %></h5>
         </div>
         <div class="card-body">
-          <ul class="list-group">
-            <% if (users && users.length) { %> <% for (let i = 0; i <
-            users.length; i++) { %>
-            <li class="list-group-item"><%= users[i].username %></li>
-            <% } %> <% } else { %>
-            <p>No users found.</p>
-            <% } %>
-          </ul>
+            <%users.filter(usr => usr.id !== me.id).map(usr => { %> 
+             <a href="/chat/<%=usr.id %>" class="d-block mt-2 w-10 py-3 <%=usr.id === id ? "bg-secondary" : "bg-dark" %>  rounded px-2 text-decoration-none text-white shadow"><%=usr.full_name  %> </a>
+          <% }) %> 
         </div>
       </div>
     </div>
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="card-title">Chat Window</h5>
+          <h5>Chat Window</h5>
         </div>
         <div class="card-body">
           <div class="chat-messages">
             <div class="message">
               <% if (messages && messages.length) { %> <% for (let i = 0; i <
               messages.length; i++) { %>
-              <div class="message-content"><%= messages[i].text %></div>
+              <div class="message-content" style="color: blue; font-weight: bold;font-family: 'Times New Roman', Times, serif;"><%= messages[i].text %></div>
+              <div class="message-timestamp">
+                <i class="fa-solid fa-clock"></i> <%= messages[i].date %>
+              </div>
               <% } %> <% } else { %>
               <p>No messages found.</p>
               <% } %>
-              <div class="message-timestamp">12:00 PM</div>
             </div>
           </div>
-          <div class="input-group mt-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Type your message..."
-            />
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button">Send</button>
+          <form action="/chat/<%= id%>" method="POST">
+            <div class="input-group mt-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Type your message..."
+                name="message"
+              />
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Send</button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

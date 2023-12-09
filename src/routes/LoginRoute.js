@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
 const path = require("path");
 const fs = require("fs/promises");
 const { generateJWTToken } = require("../modules/jwt");
@@ -37,7 +36,7 @@ router.post("/", async (req, res) => {
       username: db.users[userIndex].username,
     });
 
-    res.cookie("token", token).redirect("/chat");
+    res.cookie("token", token).redirect(`/chat/${db.users[userIndex].id}`);
   } catch (err) {
     res.render("login", { title: "Log in", error: err + "" });
   }

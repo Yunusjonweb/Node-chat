@@ -25,7 +25,6 @@ fs.readdir(path.join(__dirname, "routes"), (err, files) => {
   if (!err) {
     files.forEach((file) => {
       let routePath = path.join(__dirname, "routes", file);
-      console.log(routePath);
       let Route = require(routePath);
       if (Route.path && Route.router) {
         server.use(Route.path, Route.router);
